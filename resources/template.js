@@ -9,9 +9,11 @@ class myElement extends HTMLElement{
     getTemplate(){
         const template = document.createElement('template');
         template.innerHTML = `
+        <section>
             <h2>Soy el titulo de otro template</h2>
             <p>Yo soy el parrafo de otro template</p>
-        `;
+            <slot></slot>
+        </section>`;
 
         return template;
     }
