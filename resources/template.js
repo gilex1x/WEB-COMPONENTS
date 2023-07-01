@@ -2,6 +2,8 @@ class myElement extends HTMLElement{
     constructor(){
         //Aca definimos lo que va a estar en  nuestro element
         super();
+        this.attachShadow({mode: 'open'});//Esto me permite interactuar y ver el contenido del componente
+        //Para obtener cualquier elemento dentro del shadow dom usamos shadowroot en lugar del document
     }
 
     getTemplate(){
@@ -15,7 +17,8 @@ class myElement extends HTMLElement{
     }
 
     render(){
-        this.appendChild(this.getTemplate().content.cloneNode(true));//creamos una copia del template
+        //Agregamos el template al shadow root (sahdow DOM)
+        this.shadowRoot.appendChild(this.getTemplate().content.cloneNode(true));//creamos una copia del template
     }
 
     connectedCallback(){
