@@ -10,10 +10,14 @@ class myElement extends HTMLElement{
         const template = document.createElement('template');
         template.innerHTML = `
         <section>
-            <h2>Soy el titulo de otro template</h2>
-            <p>Yo soy el parrafo de otro template</p>
-            <slot></slot>
-        </section>`;
+            <h2>
+                <slot name="title"></slot>
+            </h2>
+            <section>
+                <slot name="text"></slot>
+            </section>
+        </section>
+        ${this.setSyles()}`;
 
         return template;
     }
@@ -21,6 +25,16 @@ class myElement extends HTMLElement{
     render(){
         //Agregamos el template al shadow root (sahdow DOM)
         this.shadowRoot.appendChild(this.getTemplate().content.cloneNode(true));//creamos una copia del template
+    }
+
+    setSyles(){
+        let styles= `
+        <style>
+            h2{ font-weight: bold}
+            p{ color: red}
+        </style>
+        `;
+        return styles;
     }
 
     connectedCallback(){

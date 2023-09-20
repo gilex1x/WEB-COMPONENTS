@@ -7,14 +7,16 @@
     <title>WEB-COMPONENTS</title>
 </head>
 <body>
+    <!--
     <template>
-        <!--All here is a template-->
+        -All here is a template
         <h2>Soy el titulo de un template</h2>
         <p>Soy el parrafor de un template</p>
-    </template>
+    </template> -->
 
     <my-element>
-        Soy texto del slot
+        <span slot="title"> Soy el titulo</span>
+        <p slot="text"> Soy texto del slot</p>
     </my-element>
     <script type="module" src="./resources/template.js"></script>
 </body>
