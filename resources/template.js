@@ -4,18 +4,22 @@ class myElement extends HTMLElement{
         super();
         this.attachShadow({mode: 'open'});//Esto me permite interactuar y ver el contenido del componente
         //Para obtener cualquier elemento dentro del shadow dom usamos shadowroot en lugar del document
+
+        // vamos a optener los atributos 
+        this.title = this.getAttribute('title');
+        this.paragraph = this.getAttribute('paragraph');
+        this.image = this.getAttribute('image');
     }
 
     getTemplate(){
         const template = document.createElement('template');
         template.innerHTML = `
         <section>
-            <h2>
-                <slot name="title"></slot>
-            </h2>
+            <h2>${this.title}</h2>
             <section>
-                <slot name="text"></slot>
+                <p>${this.paragraph}</p>
             </section>
+            <img src=${this.image} />
         </section>
         ${this.setSyles()}`;
 
