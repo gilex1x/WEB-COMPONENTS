@@ -39,8 +39,15 @@ class myElement extends HTMLElement {
   setSyles() {
     let styles = `
         <style>
-            h2{ font-weight: bold}
-            p{ color: red}
+            :host{
+              display: inline-block;
+              width: 100%;
+              min-width: 300px;
+              max-width: 500px;
+            }
+            :host(.blue){
+              background:blue;
+            }
         </style>
         `;
     return styles;
