@@ -48,8 +48,24 @@ class myElement extends HTMLElement {
 
   connectedCallback() {
     //Aca renderizamos todo
+    console.log('Hoola desdé el DOM, el elemento se ha añadido con exito')
     this.render();
+  }
+
+
+
+  disconnectedCallback(){
+    console.log('El elemento ha sido removido con exito!');
+    //Aca removemos las referencias y eventos para liberar memoria 
   }
 }
 
 customElements.define("my-element", myElement);
+
+function removeElement(){
+  let element = document.querySelector('my-element');
+  element.remove();
+}
+let button = document.querySelector('button');
+
+button.addEventListener('click',removeElement);
