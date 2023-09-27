@@ -5,6 +5,7 @@ class myElement extends HTMLElement {
     this.attachShadow({ mode: "open" }); //Esto me permite interactuar y ver el contenido del componente
     //Para obtener cualquier elemento dentro del shadow dom usamos shadowroot en lugar del document
   }
+
   //Añadimos un observador de los atributos
   static get observedAttributes() {
     return ["title", "paragraph", "image"];
@@ -58,8 +59,6 @@ class myElement extends HTMLElement {
     console.log('Hoola desdé el DOM, el elemento se ha añadido con exito')
     this.render();
   }
-
-
 
   disconnectedCallback(){
     console.log('El elemento ha sido removido con exito!');
