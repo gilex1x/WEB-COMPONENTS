@@ -21,11 +21,8 @@ class myElement extends HTMLElement {
     const template = document.createElement("template");
     template.innerHTML = `
         <section>
-            <h2>${this.title}</h2>
-            <section>
-                <p>${this.paragraph}</p>
-            </section>
-            <img src=${this.image} />
+            <slot name="title"></slot>
+            <slot name="paragraph"></slot>
         </section>
         ${this.setSyles()}`;
 
@@ -40,14 +37,9 @@ class myElement extends HTMLElement {
   setSyles() {
     let styles = `
         <style>
-            :host{
-              display: inline-block;
-              width: 100%;
-              min-width: 300px;
-              max-width: 500px;
-            }
-            :host(.blue){
-              background:blue;
+            ::slotted(span){
+              font-size: 50px;
+              color:red;
             }
         </style>
         `;
