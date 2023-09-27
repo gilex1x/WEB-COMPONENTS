@@ -7,7 +7,7 @@ class productCard extends HTMLElement {
 
   //Añadimos un observador de los atributos
   static get observedAttributes() {
-    return ["title", "price", "description"];
+    return ["title", "price", "description","maincolor","fsize","fprimarycolor","datawidth","dataheight"];
   }
 
   render(){
@@ -19,11 +19,14 @@ class productCard extends HTMLElement {
     const card = document.createElement("template");
 
     card.innerHTML = `
-    <div>
-        <h2>${this.title}</h2>
-        <span>${this.price}</span>
-        <h2>${this.description}</h2>
+    <div class="card-main-container">
+        <h2 class="card-main-title">${this.title || "Jhon Doe"}</h2>
+        <span>${this.price || "$0.00"}</span>
+        <div class="card-content-container">
+        <p>${this.description || "lorem ipsum in dolorem "}</p>
+        </di>
     </div>
+    ${this.setStyles()}
     `;
 
     return card;
@@ -31,6 +34,22 @@ class productCard extends HTMLElement {
 
   setStyles(){
     //Syles here
+    return `
+      <style>
+        :host{
+          --primary-color: ${this.maincolor || "#fff"};
+          width: ${this.datawidth || "300px"};
+          height: ${this.dataheight || "300px"};
+        }
+        .card-main-container{
+          background: var(--primary-color)
+        }
+        h2{
+          font-size: ${this.fsize || "1rem"};
+          color: ${this.fprimarycolor || "#fff"}
+        }
+      </style>
+    `
   }
 
   
@@ -44,6 +63,11 @@ class productCard extends HTMLElement {
   connectedCallback(){
     //Aca llamamos al render
     this.render();
+  }
+
+  disconnectedCallback(){
+    console.log('El elemento ha sido removido con exito!');
+    //Aca removemos las referencias y eventos para liberar memoria 
   }
 
 }
