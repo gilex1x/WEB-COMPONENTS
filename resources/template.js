@@ -12,8 +12,8 @@ class myElement extends HTMLElement {
   }
 
   attributeChangedCallback(current, oldValue, newValue) {
-    if(oldValue !== newValue){
-        this[current] = newValue;
+    if (oldValue !== newValue) {
+      this[current] = newValue;
     }
   }
 
@@ -21,8 +21,12 @@ class myElement extends HTMLElement {
     const template = document.createElement("template");
     template.innerHTML = `
         <section>
-            <slot name="title"></slot>
-            <slot name="paragraph"></slot>
+            <h1>
+              <slot name="title"></slot>
+            </h1>
+            <p>
+              <slot name="paragraph"></slot>
+            </p>
         </section>
         ${this.setSyles()}`;
 
@@ -35,12 +39,21 @@ class myElement extends HTMLElement {
   }
 
   setSyles() {
+    /* El host viene siendo el root del shadow dom de nuestro web component */
     let styles = `
         <style>
-            ::slotted(span){
-              font-size: 50px;
-              color:red;
-            }
+        :host{
+          --primary-color: tomato;
+          --secondary-color:salmon;
+          --heading-primary: 32px;
+          --heading-secondary: 28px;
+        }
+        section{
+          background-color: var(--primary-color);
+        }
+        section h1 {
+          font-size: var(--heading-primary);
+        }
         </style>
         `;
     return styles;
@@ -48,22 +61,22 @@ class myElement extends HTMLElement {
 
   connectedCallback() {
     //Aca renderizamos todo
-    console.log('Hoola desdé el DOM, el elemento se ha añadido con exito')
+    console.log("Hoola desdé el DOM, el elemento se ha añadido con exito");
     this.render();
   }
 
-  disconnectedCallback(){
-    console.log('El elemento ha sido removido con exito!');
-    //Aca removemos las referencias y eventos para liberar memoria 
+  disconnectedCallback() {
+    console.log("El elemento ha sido removido con exito!");
+    //Aca removemos las referencias y eventos para liberar memoria
   }
 }
 
 customElements.define("my-element", myElement);
 
-function removeElement(){
-  let element = document.querySelector('my-element');
+function removeElement() {
+  let element = document.querySelector("my-element");
   element.remove();
 }
-let button = document.querySelector('button');
+let button = document.querySelector("button");
 
-button.addEventListener('click',removeElement);
+button.addEventListener("click", removeElement);
